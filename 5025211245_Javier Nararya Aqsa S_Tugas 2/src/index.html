@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>3D WebGL Articulated Model</title>
+  </head>
+  <body>
+    <header>3D WebGL Articulated Model</header>
+    <div class="container">
+      <!-- tools container -->
+      <div class="tools-container">
+        <h2>Tools</h2>
+        <div class="save-load">
+          <input type="file" id="objFile" accept="application/json" />
+          <button id="save">Save</button>
+        </div>
+        <div class="color">
+          <label for="color">Color: </label>
+          <input type="color" id="color-picker" />
+        </div>
+        <div class="shading">
+          <label for="lighting">Shading</label>
+          <input type="checkbox" id="lighting" />
+        </div>
+        <div class="texture">
+          <label for="texture-dropdown">texture</label>
+          <select name="texture-dropdown" id="texture-dropdown">
+            <option>none</option>
+            <option value="custom">custom</option>
+            <option value="bump">bump</option>
+            <option value="environment">environment</option>
+          </select>
+        </div>
+        <h3>Projection</h3>
+        <div class="projection" id="projection">
+          <input
+            type="radio"
+            id="orthographic"
+            name="projection"
+            value="orthographic"
+            checked
+          />
+          <label for="orthographic">Orthographic</label>
+          <input type="radio" id="oblique" name="projection" value="oblique" />
+          <label for="oblique">Oblique</label>
+          <input
+            type="radio"
+            id="perspective"
+            name="projection"
+            value="perspective"
+          />
+          <label for="perspective">Perspective</label>
+        </div>
+        <h3>Camera</h3>
+        <div class="camera-container">
+          <div class="camera-pos">
+            <label for="camera-x">Vertical Position</label>
+            <div class="camera-pos">
+              <input type="range" id="camera-x" min="-89" max="89" value="0" />
+              <span id="camera-x-value">0</span>
+            </div>
+            <label for="camera-x">Horizontal Position</label>
+            <div class="camera-pos">
+              <input
+                type="range"
+                id="camera-y"
+                min="-360"
+                max="360"
+                value="0"
+              />
+              <span id="camera-y-value">0</span>
+            </div>
+            <label for="camera-x">Distance to Object(s)</label>
+            <div class="camera-pos">
+              <input
+                type="range"
+                id="camera-z"
+                min="-100"
+                max="100"
+                value="1"
+              />
+              <span id="camera-z-value">0</span>
+            </div>
+          </div>
+          <div class="camera-misc">
+            <label for="fov">FOV</label>
+            <div class="camera-misc">
+              <input type="range" id="fov" />
+              <span id="fov-value">0</span>
+            </div>
+            <label for="theta">Theta</label>
+            <div class="camera-misc">
+              <input type="range" id="theta" min="7" max="173" />
+              <span id="theta-value">0</span>
+            </div>
+            <label for="phi">phi</label>
+            <div class="camera-misc">
+              <input type="range" id="phi" min="7" max="173" />
+              <span id="phi-value">0</span>
+            </div>
+          </div>
+        </div>
+        <div class="transform-title" id="transform-title"></div>
+        <div class="transform-container">
+          <div class="slider-container">
+            <span>Translate</span>
+            <div class="transform">
+              <label for="translateX">X</label>
+              <input
+                type="range"
+                id="translate-x"
+                min="-100"
+                max="100"
+                value="0"
+              />
+              <span id="translate-x-value">0</span>
+            </div>
+            <div class="transform">
+              <label for="translateY">Y</label>
+              <input
+                type="range"
+                id="translate-y"
+                min="-100"
+                max="100"
+                value="0"
+              />
+              <span id="translate-y-value">0</span>
+            </div>
+            <div class="transform">
+              <label for="translateZ">Z</label>
+              <input
+                type="range"
+                id="translate-z"
+                min="-100"
+                max="100"
+                value="0"
+              />
+              <span id="translate-z-value">0</span>
+            </div>
+          </div>
+          <div class="slider-container">
+            <span>Rotate</span>
+            <div class="transform">
+              <label for="rotateX">X</label>
+              <input
+                type="range"
+                id="rotate-x"
+                min="-360"
+                max="360"
+                value="0"
+              />
+              <span id="rotate-x-value">0</span>
+            </div>
+            <div class="transform">
+              <label for="rotateY">Y</label>
+              <input
+                type="range"
+                id="rotate-y"
+                min="-360"
+                max="360"
+                value="-45"
+              />
+              <span id="rotate-y-value">0</span>
+            </div>
+            <div class="transform">
+              <label for="rotateZ">Z</label>
+              <input
+                type="range"
+                id="rotate-z"
+                min="-360"
+                max="360"
+                value="0"
+              />
+              <span id="rotate-z-value">0</span>
+            </div>
+          </div>
+          <div class="slider-container">
+            <span>Scale</span>
+            <div class="transform">
+              <label for="scaleX">X</label>
+              <input type="range" id="scale-x" min="0.2" max="100" value="0" />
+              <span id="scale-x-value">0</span>
+            </div>
+            <div class="transform">
+              <label for="scaleY">Y</label>
+              <input type="range" id="scale-y" min="0.2" max="100" value="0" />
+              <span id="scale-y-value">0</span>
+            </div>
+            <div class="transform">
+              <label for="scaleZ">Z</label>
+              <input type="range" id="scale-z" min="0.2" max="100" value="0" />
+              <span id="scale-z-value">0</span>
+            </div>
+          </div>
+        </div>
+        <div class="bottom-buttons">
+          <button id="help" onclick="location.href='help.html'">
+            Show Help
+          </button>
+          <button id="reset-transform">Reset Transform</button>
+          <button id="reset-camera">Reset Camera</button>
+          <!-- <button id="reset">Reset All</button> -->
+          <button id="animation">Start Animation</button>
+          <button id="stop-anim" class="hidden">Stop Animation</button>
+        </div>
+      </div>
+      <!-- canvas -->
+      <div class="canvas-container">
+        <canvas id="canvas" width="720" height="720"></canvas>
+      </div>
+      <!-- component container -->
+      <div class="component-container">
+        <h2>Components</h2>
+        <div id="components"></div>
+      </div>
+    </div>
+  </body>
+  <script src="js/tree.js"></script>
+  <script src="js/texture.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/matrices.js"></script>
+  <script src="js/webgl.js"></script>
+  <script src="js/model.js"></script>
+  <script src="js/controller.js"></script>
+  <script src="js/animation.js"></script>
+  <!-- <script src="js/h00man.js"></script> -->
+  <!-- <script src="js/girrafe.js"></script> -->
+  <script src="js/souta.js"></script>
+  <!-- <script src="js/wither.js"></script> -->
+  <script src="js/index.js"></script>
+</html>

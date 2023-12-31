@@ -1,0 +1,102 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #fff;
+  margin: 0;
+  background-color: #222;
+}
+
+h2 {
+  margin: 5px 0px;
+}
+
+h3 {
+  margin: 10px 0px;
+}
+
+header {
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+}
+
+input[type="range"] {
+  width: 100px;
+}
+
+.container {
+  background-color: #555;
+  height: 100%;
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.tools-container {
+  width: 1000px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.component-container {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.bottom-buttons {
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.help-page {
+  margin: 24px;
+}
+
+.hidden {
+  display: none;
+}
+
+.camera-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-items: center;
+  column-gap: 20px;
+}
+
+.transform-title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  column-gap: 50px;
+}
+
+.transform-container {
+  display: flex;
+  flex-direction: row;
+  column-gap: 24px;
+}
+
+.slider-container {
+  width: 180px;
+}
+
+.transform {
+  display: flex;
+  flex-direction: row;
+  column-gap: 10px;
+}
+
+.component-name {
+  margin: 5px;
+}
+
+.component:hover {
+  background-color: #777;
+  cursor: pointer;
+}
